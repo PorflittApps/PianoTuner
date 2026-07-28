@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#121826" />
+  <meta name="description" content="Afinador gratuito para piano que detecta nota, frecuencia y desviación en cents." />
+  <title>Afinador de Piano</title>
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <link rel="icon" href="./icons/icon-192.png" />
+  <link rel="apple-touch-icon" href="./icons/icon-192.png" />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <main class="app-shell">
+    <header class="app-header">
+      <div>
+        <p class="eyebrow">VERSIÓN 0.1</p>
+        <h1>Afinador de Piano</h1>
+        <p class="subtitle">Detecta la nota, frecuencia y desviación usando el micrófono.</p>
+      </div>
+      <button id="installButton" class="secondary-button hidden" type="button">
+        Instalar
+      </button>
+    </header>
+
+    <section class="panel tuner-panel" aria-live="polite">
+      <div class="note-row">
+        <div>
+          <span class="label">Nota detectada</span>
+          <div id="noteName" class="note-name">—</div>
+        </div>
+        <div class="frequency-block">
+          <span class="label">Frecuencia</span>
+          <div><span id="frequency">—</span> <small>Hz</small></div>
+        </div>
+      </div>
+
+      <div class="gauge" aria-label="Indicador de afinación">
+        <div class="gauge-scale">
+          <span>−50</span>
+          <span>−25</span>
+          <span>0</span>
+          <span>+25</span>
+          <span>+50</span>
+        </div>
+        <div class="gauge-track">
+          <div class="zone low"></div>
+          <div class="zone tuned"></div>
+          <div class="zone high"></div>
+          <div id="needle" class="needle"></div>
+        </div>
+      </div>
+
+      <div class="readouts">
+        <div class="readout">
+          <span class="label">Desviación</span>
+          <strong><span id="cents">—</span> cents</strong>
+        </div>
+        <div class="readout">
+          <span class="label">Frecuencia objetivo</span>
+          <strong><span id="targetFrequency">—</span> Hz</strong>
+        </div>
+      </div>
+
+      <div id="statusMessage" class="status idle">
+        Presiona “Comenzar” y permite el uso del micrófono.
+      </div>
+    </section>
+
+    <section class="panel controls-panel">
+      <div class="control-group">
+        <label for="a4Reference">Referencia de afinación</label>
+        <div class="reference-input">
+          <span>A4 =</span>
+          <input id="a4Reference" type="number" min="430" max="450" step="0.1" value="440.0" />
+          <span>Hz</span>
+        </div>
+      </div>
+
+      <div class="button-row">
+        <button id="startButton" class="primary-button" type="button">Comenzar</button>
+        <button id="stopButton" class="secondary-button" type="button" disabled>Detener</button>
+      </div>
+    </section>
+
+    <section class="panel help-panel">
+      <h2>Cómo usarlo</h2>
+      <ol>
+        <li>Acerca el teléfono o computador al piano.</li>
+        <li>Presiona una sola tecla y deja que el sonido se estabilice.</li>
+        <li>La aguja indica si la nota está grave, afinada o aguda.</li>
+      </ol>
+      <p class="warning">
+        Esta versión sirve para evaluar y orientar la afinación. Manipular clavijas y cuerdas de un piano requiere conocimientos técnicos.
+      </p>
+    </section>
+
+    <footer>
+      <span>Afinador gratuito para piano</span>
+      <span id="micState">Micrófono inactivo</span>
+    </footer>
+  </main>
+
+  <script src="./app.js"></script>
+</body>
+</html>
